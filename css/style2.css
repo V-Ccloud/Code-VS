@@ -1,0 +1,271 @@
+:root{
+    --mainColor: rgb(0, 90, 0);
+}
+
+
+body{
+    font-family: 'Roboto';
+}
+a{
+    color: var(--mainColor);
+}
+a:hover{
+    color: var(--mainColor);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-link, .navbar-brand{
+    text-transform: uppercase;
+}
+.myNavbar{
+    background: url('../img/carousel-legumes.png');
+    background-size: cover;
+    background-position: center;
+}
+.myNavbar .navContent{
+    background: rgba(0,0,0,0.8);
+}
+.dropdown-menu .dropdown-produits-image{
+    width: 100%;
+    height: 150px;
+    background: url('../img/Argume.png');
+    background-position: center;
+    background-size: cover;
+}
+.dropdown-menu .dropdown-about-image{
+    width: 100%;
+    height: 200px;
+    background: url('../img/laitier.png');
+    background-position: center;
+    background-size: cover;
+}
+.myNavbar .icon{
+    font-size: 20px;
+}
+.myNavbar .cart-counter{
+    font-size: 20px;
+    margin-left: -4px;
+    color: orange;
+    font-weight: bold;
+    position: absolute;
+    top: 0px;
+    right: inherit;
+}
+
+.myInput{
+    background: silver;
+    padding-left: 7px;
+    border: none;
+    border-bottom: 5px solid var(--mainColor);
+    border-radius: 7px;
+}
+.myInput:focus{
+    outline: none;
+}
+
+.myBtn{
+    background: var(--mainColor);
+    border-radius: 20px;
+}
+
+.myCarouselItem{
+    height: 60vh;
+}
+.myCarouselItem .content{
+    padding-top: 4em;
+}
+.myCarouselItem .content .block{
+    height: 60vh;
+    background: rgba(255,255,255,0.5);
+    height: 90%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 2px rgb(68, 68, 68);
+    overflow: hidden;
+}
+.myCarouselItem .content .block .image-laitier{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: url('../img/laitier.png');
+    background-size: cover;
+    background-position: center;
+    width: 140px;
+    height: 90px;
+    border-bottom-right-radius: 20px;
+}
+.myCarouselItem .content .block .image-legume{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: url('../img/legumes.png');
+    background-size: cover;
+    background-position: center;
+    width: 140px;
+    height: 90px;
+    border-bottom-right-radius: 20px;
+}
+.myCarouselItem .content .block .image-argume{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: url('../img/Argume.png');
+    background-size: cover;
+    background-position: center;
+    width: 140px;
+    height: 90px;
+    border-bottom-right-radius: 20px;
+}
+.myCarouselItem .content .block h1{
+    text-transform: uppercase;
+    color: var(--mainColor);
+    font-weight: bolder;
+    text-align: right;
+    font-size: 2em;
+}
+.myCarouselItem .content .block h5{
+    text-align: center;
+    font-weight: bold;
+}
+
+.promotion-bg1, .promotion-bg2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    transition: .7s;
+}
+.promotion-bg1{
+    background: rgb(104, 104, 104);
+    color: #fff;
+}
+.promotion-bg1:hover{
+    background: rgb(53, 53, 53);
+}
+.promotion-bg2{
+    background: rgb(151, 151, 151);
+    color: var(--mainColor);
+}
+.promotion-bg2:hover{
+    background: rgb(53, 53, 53);
+}
+.promotion .icon{
+    font-size: 40px;
+}
+
+.products-categories .row{
+    overflow: hidden;
+}
+.products-categories .content{
+    padding: 20px;
+}
+.products-categories .categorie{
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    width: 100%;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.products-categories .cat-laitiers{
+    background: url('../img/laitier.png');
+    background-size: cover;
+    background-position: center;
+    padding: 0px;
+    transition: .5s;
+}
+.products-categories .cat-laitiers:hover{
+    transform: translateY(-10px);
+}
+.products-categories .cat-legumes{
+    background: url('../img/legumes.png');
+    background-size: cover;
+    background-position: center;
+    padding: 0px;
+    transition: .5s;
+}
+.products-categories .cat-legumes:hover{
+    transform: translateY(-10px);
+}
+.products-categories .cat-argumes{
+    background: url('../img/Argume.png');
+    background-size: cover;
+    background-position: center;
+    padding: 0px;
+    transition: .5s;
+}
+.products-categories .cat-argumes:hover{
+    transform: translateY(-10px);
+}
+
+footer{
+    background: rgb(36, 36, 36);
+    color: #fff;
+    padding: 4em;
+    margin-top: 4em;
+}
+footer .icon{
+    font-size: 35px;
+}
+footer a{
+    color: #fff;
+}
+footer .copyright{
+    font-size: 13px;
+    color: silver;
+}
+
+.myHeader{
+    padding: 10px;
+}
+.myHeader .right{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.myHeader .right .icon{
+    font-size: 25px;
+    padding-left: 10px
+}
+
+.myContainer{
+    padding: 4em 2em 0em 2em;
+}
+
+#myAlert{
+    padding: 10px;
+    background: #000;
+    color: #fff;
+    border-radius: 10px 0px 0px 10px;
+    position: fixed;
+    right: -500px;
+    top: 5vh;
+    transition: .7s;
+}
+
+.product-display .photo{
+    padding: 15px;
+}
+.product-display .details{
+    padding: 15px;
+}
+.product-display .details h5{
+    color: var(--mainColor);
+}
+
+.logoToMoveOnScroll, .navbar-brand{
+    transition: 1s;
+}
+.logoToMoveOnScroll{
+    position: fixed;
+    left: 2em;
+    top: 0.8em;
+    height: 22px;
+    z-index: 99999;
+}
