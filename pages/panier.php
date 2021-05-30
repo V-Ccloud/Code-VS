@@ -1,6 +1,12 @@
 <!-- this is the one that shows le panier -->
 <p><br><br></p>
 
+
+<script>
+    document.querySelector('title').textContent="Mon panier : <?php echo $site_name ?>"; //page title
+</script>
+
+
 <div class="container">
     <div class="row">
         <?php
@@ -63,7 +69,11 @@
         <div class="col-12">
             <hr>
             <a href="?q=produits"><button class="btn btn-dark">+<span class="fa fa-shopping-cart"></span> Ajouter au panier</button></a> 
-            <a href="#" id="validerPanier"><button class="btn btn-dark"><span class="fa fa-check"></span><span class="fa fa-shopping-cart"></span> Valider mon panier</button></a>
+            <?php if ($us_id <= 0){ //user not connected ?>
+                <a href="#" data-toggle="modal" data-target="#modalConnexion" id="validerPanier"><button class="btn btn-dark"><span class="fa fa-check"></span><span class="fa fa-shopping-cart"></span> Valider mon panier</button></a>
+            <?php }else{ ?>
+                <a href="?q=commande" id="validerPanier"><button class="btn btn-dark"><span class="fa fa-check"></span><span class="fa fa-shopping-cart"></span> Valider mon panier</button></a>
+            <?php } ?>
         </div>
         <!-- //cart is displayed here avec ajax -->
     </div>

@@ -1,5 +1,12 @@
 // this main js file
 
+
+
+window.onload = function(){
+    $('.page-loader').fadeOut(); //fade out page loader if page content ready
+}
+
+
 //---by default, get cart in session and add it to cart counter in index.php---
 let theCart = sessionStorage.getItem('cart');
 // if (theCart !== null) document.querySelector('.cart-counter').textContent = JSON.parse(theCart).length;
@@ -160,6 +167,64 @@ function signInClient(event){
 }
 // ----//sign in client---
 
+
+// --sign up pme--
+function signUpPme(event){
+    event.preventDefault();
+
+    if (event.target.nom.value.length < 2 || event.target.nom.value.length > 20){
+        myAlert("Nom invalide. 2 caractères min et 20 max");
+    }
+    else if (event.target.email.value.length < 10 || event.target.email.value.length > 60){
+        myAlert("Email invalide. 10 caractères min et 60 max. Doit contenir @");
+    }
+    else if (event.target.phone.value.length < 6){
+        myAlert("Téléphone invalide. Ex : +212xxxxxxxxx");
+    }
+    else if (event.target.mdp.value.length < 6){
+        myAlert("Mot de passe invalide. 6 caractères min");
+    }
+    else{
+        var formData = {
+            nom: event.target.nom.value,
+            phone: event.target.phone.value,
+            email: event.target.email.value,
+            mdp: event.target.mdp.value
+        };
+        $.post("pages/php/signUpPme.php", formData).done(function (data) {
+            if (data.substring(0, 5) == "error") myAlert(data.substring(6));
+            else{
+                event.target.innerHTML = data;
+                event.target.innerHTML += '<button type="button" class="btn btn-success" data-dismiss="modal">Fermer</button>';
+            }
+        });
+    }
+}
+// --//sign up pme--
+
+// ----sign in pme---
+function signInPme(event){
+    event.preventDefault();
+
+    var formData = {
+        email: event.target.email.value,
+        mdp: event.target.mdp.value
+    };
+    $.post("pages/php/signInPme.php", formData).done(function (data) {
+        if (data.substring(0, 5) == "error") myAlert(data.substring(6));
+        else if (data.substring(0, 14) == "enVerification") event.target.innerHTML = data.substring(15) + "<hr>";
+        else{
+            event.target.innerHTML = data;
+            let x=setTimeout(() => {
+                clearTimeout(x);
+                window.location.href=""; //reload the page
+            }, 3000);
+        }
+    });
+}
+// ----//sign in pme---
+
+
 //-----save user cart in data base (if he has cart in session)----
 function saveCartInDataBase(){
     let userCart = sessionStorage.getItem('cart');
@@ -187,7 +252,7 @@ $(document).ready(function(){
     $(window).scroll(function(){
         if ($(window).scrollTop() > 50 && $(window).scrollTop() <= 100){
             //---disable the text in the place it gonna live in//----
-            $('.navbar-brand').css('opacity','0');
+            $('.myNavbarBrand').css('opacity','0');
 
             //---move logo//----
             $('.logoToMoveOnScroll').css('height','32px');
@@ -199,7 +264,7 @@ $(document).ready(function(){
             $('.logoToMoveOnScroll').css('top','0.8em');
             
             //---disable the text in the place it gonna live in//----
-            $('.navbar-brand').css('opacity','1');
+            $('.myNavbarBrand').css('opacity','1');
         }
     });
 });

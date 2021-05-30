@@ -79,6 +79,21 @@
                 <hr>
                 <h2><?php echo $data['pr_prix'] ?><span style="font-size:14px"><?php echo $devise ?></h2>
                 <p></p>
+                <div class="">
+                    <?php
+                    $pme=$db->prepare('SELECT pme_logo, pme_nom FROM pme WHERE pme_id=:id LIMIT 1'); //get pme infos, the one qui vend ce produit
+                    $pme->bindValue(':id', $data['pme_id'], PDO::PARAM_INT);
+                    $pme->execute();
+                    $pme=$pme->fetch();
+                    ?>
+                    <a href="?q=pme&pme=<?php echo $data['pme_id'] ?>">
+                        <!-- the name// -->
+                        <i>Vendu par <?php echo $pme['pme_nom'] ?></i>
+                        <!-- the photo// -->
+                        <div style="background:url('img/pme/<?php echo $pme['pme_logo'] ?>'); background-size:cover; background-position:center; width:50px; height:50px"></div>
+                    </a>
+                </div>
+                <p></p>
                 <button type="button" class="btn btn-success myBtn" onclick="addToCart('<?php echo $id ?>', '<?php echo $us_id ?>')">+<span class="fa fa-shopping-cart"></span> Ajouter au panier</button>
                 <p></p>
                 <p><?php echo $data['pr_description'] ?></p>

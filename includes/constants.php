@@ -9,14 +9,16 @@ $site_email = "exemple@gmail.com";
 
 $site_phone = "+212601010101";
 
-$site_facebook = "";
+$site_facebook = "lien facebook";
 
-$site_instagram = "";
+$site_instagram = "lien instagram";
 
-$site_twitter = "";
+$site_twitter = "lien twitter";
 
-$site_whatsapp = "";
+$site_whatsapp = "+212601010101";
 
 $devise = "dh";
+
+$types_produit = array('laitier', 'legume', 'argume');
 
 ?>

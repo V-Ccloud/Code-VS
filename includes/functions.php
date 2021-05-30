@@ -40,4 +40,16 @@ function display_product($id, $title, $photo, $prix){
     <?php
 }
 // --//this function displays a product--
+
+
+//--------function qui upload une image dans le dossier $dossier du site---------
+function move_image($photo, $dossier){
+	$extension_upload=strtolower(substr(  strrchr($photo['name'], '.')  ,1));
+	$name=time();
+	$nomphoto=str_replace('','',$name).".".$extension_upload;
+	$name=$dossier."/".str_replace('','',$name).".".$extension_upload;
+	move_uploaded_file($photo['tmp_name'],$name);
+	return $nomphoto; //retourner le nom de la photo (à sauvegarder dans la base de données)
+}
+//--------//function qui upload une image dans le dossier $dossier du site---------
 ?>

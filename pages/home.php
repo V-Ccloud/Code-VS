@@ -115,8 +115,11 @@
 <div class="container myContainer">
     <div class="row">
         <div class="col-12">
-            <h1>SELECTION DE PRODUITS</h1>
-            <hr>
+            <div class="textInLines">
+                <div class="line"></div>
+                <div class="text" style="font-size:30px">SELECTION DE PRODUITS</div>
+                <div class="line"></div>
+            </div>
         </div>
         
         <!-- version pc et grand écran -->
@@ -138,6 +141,14 @@
 
                 $query->closeCursor();
                 ?>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <hr>
+                    <center>
+                        <a href="?q=produits"><button type="button" class="btn btn-dark">VOIR TOUS LES PRODUITS</button></a>
+                    </center>
+                </div>
             </div>
         </div>
         <!-- //version pc et grand écran -->
@@ -162,6 +173,14 @@
                 $query->closeCursor();
                 ?>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <hr>
+                    <center>
+                        <a href="?q=produits"><button type="button" class="btn btn-dark btn-sm">VOIR TOUS LES PRODUITS</button></a>
+                    </center>
+                </div>
+            </div>
         </div>
         <!-- //version pc et grand écran -->
     </div>
@@ -174,36 +193,45 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>CATEGORIES</h1>
-            <hr>
+            <div class="textInLines">
+                <div class="line"></div>
+                <div class="text" style="font-size:30px">CATEGORIES</div>
+                <div class="line"></div>
+            </div>
         </div>
     </div>
 </div>
 <div class="container-fluid products-categories">
     <div class="row">
         <div class="col-md-4 content">
+            <a href="?q=produits&type=laitier">
             <div class="cat-laitiers">
                 <div class="categorie">
                     <h1>Produits</h1>
                     <h1>Laitiers</h1>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-md-4 content">
+            <a href="?q=produits&type=legume">
             <div class="cat-legumes">
                 <div class="categorie">
                     <h1>Produits</h1>
                     <h1>Légumes</h1>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-md-4 content">
+            <a href="?q=produits&type=argume">
             <div class="cat-argumes">
                 <div class="categorie">
                     <h1>Produits</h1>
                     <h1>Argûmes</h1>
                 </div>
             </div>
+            </a>
         </div>
     </div>
 </div>

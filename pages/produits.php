@@ -1,5 +1,11 @@
 <!-- this is product file -->
 
+
+<script>
+    document.querySelector('title').textContent="Nos produits : <?php echo $site_name ?>"; //page title
+</script>
+
+
 <div class="container-fluid myContainer">
     <div class="row">
         <div class="col-12">
@@ -8,9 +14,11 @@
                 <option value="recent">Tri du plen récent au plus ancien</option>
                 <option value="croissant">Tri par prix croissant</option>
                 <option value="decroissant">Tri par prix décroissant</option>
-                <option value="laitier">Afficher que les laitiers</option>
-                <option value="legume">Afficher que les légumes</option>
-                <option value="argume">Afficher que les argûmes</option>
+                <?php
+                foreach ($types_produit as $type_produit){ //$types_produit est dans includes/constants.php
+                    ?><option value="<?php echo $type_produit ?>">Afficher que le type <?php echo $type_produit ?></option><?php
+                }
+                ?>
             <select>
             <hr>
         </div>
@@ -21,6 +29,8 @@
         $page = (int) (isset($_GET['page']))?(htmlspecialchars($_GET['page'])):'1'; //pagination
         $type = (isset($_GET['type']))?(htmlspecialchars($_GET['type'])):'all'; //type de produit
         $filter = (isset($_GET['filter']))?(htmlspecialchars($_GET['filter'])):'none';
+        $search = (isset($_GET['search']))?(htmlspecialchars($_GET['search'])):'none'; //permet de savoir (ci-dessous) que le user a fait une recherche ou pas
+        $pme = (isset($_GET['pme']))?(htmlspecialchars($_GET['pme'])):''; //pme id (if user wanna see only products for a specific pme)
 
         if ($filter != "none"){ //set current filter value
             ?>
@@ -29,7 +39,7 @@
             </script>
             <?php
         }
-        else if ($type != "all"){ //set current filter value
+        else if ($type != "all" and !isset($_GET['pme'])){ //set current filter value
             ?>
             <script>
                 document.getElementById('filterSelect').value = "<?php echo $type ?>";
@@ -50,41 +60,88 @@
                     <div class="row">
                         <?php
                         //--select all product depuis la base de données--
-                        if ($filter == "recent"){
-                            $query=$db->prepare('SELECT * FROM products ORDER BY pr_id DESC LIMIT :min, :max');
-                            $query->bindValue(':min', $min, PDO::PARAM_INT);
-                            $query->bindValue(':max', $max, PDO::PARAM_INT);
-                            $query->execute();
-                        }
-                        else if ($filter == "croissant"){
-                            $query=$db->prepare('SELECT * FROM products ORDER BY pr_prix ASC LIMIT :min, :max');
-                            $query->bindValue(':min', $min, PDO::PARAM_INT);
-                            $query->bindValue(':max', $max, PDO::PARAM_INT);
-                            $query->execute();
-                        }
-                        else if ($filter == "decroissant"){
-                            $query=$db->prepare('SELECT * FROM products ORDER BY pr_prix DESC LIMIT :min, :max');
-                            $query->bindValue(':min', $min, PDO::PARAM_INT);
-                            $query->bindValue(':max', $max, PDO::PARAM_INT);
-                            $query->execute();
-                        }
-                        else{ //no filter
-                            $query=$db->prepare('SELECT * FROM products ORDER BY pr_id DESC LIMIT :min, :max');
-                            $query->bindValue(':min', $min, PDO::PARAM_INT);
-                            $query->bindValue(':max', $max, PDO::PARAM_INT);
-                            $query->execute();
-                        }
-                        //--//select all product depuis la base de données--
+                        if ($search == 'none'){ //pas de recherche
+                            if ($filter == "recent"){
+                                $query=$db->prepare('SELECT * FROM products ORDER BY pr_id DESC LIMIT :min, :max');
+                                $query->bindValue(':min', $min, PDO::PARAM_INT);
+                                $query->bindValue(':max', $max, PDO::PARAM_INT);
+                                $query->execute();
+                            }
+                            else if ($filter == "croissant"){
+                                $query=$db->prepare('SELECT * FROM products ORDER BY pr_prix ASC LIMIT :min, :max');
+                                $query->bindValue(':min', $min, PDO::PARAM_INT);
+                                $query->bindValue(':max', $max, PDO::PARAM_INT);
+                                $query->execute();
+                            }
+                            else if ($filter == "decroissant"){
+                                $query=$db->prepare('SELECT * FROM products ORDER BY pr_prix DESC LIMIT :min, :max');
+                                $query->bindValue(':min', $min, PDO::PARAM_INT);
+                                $query->bindValue(':max', $max, PDO::PARAM_INT);
+                                $query->execute();
+                            }
+                            else{ //no filter
+                                $query=$db->prepare('SELECT * FROM products ORDER BY pr_id DESC LIMIT :min, :max');
+                                $query->bindValue(':min', $min, PDO::PARAM_INT);
+                                $query->bindValue(':max', $max, PDO::PARAM_INT);
+                                $query->execute();
+                            }
+                            //--//select all product depuis la base de données--
 
-                        //----affichage--
-                        while ($data=$query->fetch()){
-                            ?><div class="col-6 col-md-3"><?php
-                            display_product($data['pr_id'], $data['pr_title'], $data['pr_photo_1'], $data['pr_prix']);
-                            ?></div><?php
-                        }
-                        //----//affichage--
+                            //----affichage--
+                            while ($data=$query->fetch()){
+                                ?><div class="col-6 col-md-3"><?php
+                                display_product($data['pr_id'], $data['pr_title'], $data['pr_photo_1'], $data['pr_prix']);
+                                ?></div><?php
+                            }
+                            //----//affichage--
 
-                        $query->closeCursor();
+                            $query->closeCursor();
+                        }
+                        else{ //c'est une recherche
+                            $searchQuery = (isset($_POST['searchQuery']))?(htmlspecialchars($_POST['searchQuery'])):'';
+
+                            echo "<div class='col-12'><h6><b>RECHERCHE :</b> ".$searchQuery."</h6></div>";
+
+                            if ($filter == "recent"){
+                                $query=$db->prepare('SELECT * FROM products WHERE pr_title LIKE :searchQ OR pr_description LIKE :searchQ ORDER BY pr_id DESC LIMIT :min, :max');
+                                $query->bindValue(':min', $min, PDO::PARAM_INT);
+                                $query->bindValue(':max', $max, PDO::PARAM_INT);
+                                $query->bindValue(':searchQ', '%'.$searchQuery.'%', PDO::PARAM_STR);
+                                $query->execute();
+                            }
+                            else if ($filter == "croissant"){
+                                $query=$db->prepare('SELECT * FROM products WHERE pr_title LIKE :searchQ OR pr_description LIKE :searchQ ORDER BY pr_prix ASC LIMIT :min, :max');
+                                $query->bindValue(':min', $min, PDO::PARAM_INT);
+                                $query->bindValue(':max', $max, PDO::PARAM_INT);
+                                $query->bindValue(':searchQ', '%'.$searchQuery.'%', PDO::PARAM_STR);
+                                $query->execute();
+                            }
+                            else if ($filter == "decroissant"){
+                                $query=$db->prepare('SELECT * FROM products WHERE pr_title LIKE :searchQ OR pr_description LIKE :searchQ ORDER BY pr_prix DESC LIMIT :min, :max');
+                                $query->bindValue(':min', $min, PDO::PARAM_INT);
+                                $query->bindValue(':max', $max, PDO::PARAM_INT);
+                                $query->bindValue(':searchQ', '%'.$searchQuery.'%', PDO::PARAM_STR);
+                                $query->execute();
+                            }
+                            else{ //no filter
+                                $query=$db->prepare('SELECT * FROM products WHERE pr_title LIKE :searchQ OR pr_description LIKE :searchQ ORDER BY pr_id DESC LIMIT :min, :max');
+                                $query->bindValue(':min', $min, PDO::PARAM_INT);
+                                $query->bindValue(':max', $max, PDO::PARAM_INT);
+                                $query->bindValue(':searchQ', '%'.$searchQuery.'%', PDO::PARAM_STR);
+                                $query->execute();
+                            }
+                            //--//select all product depuis la base de données--
+
+                            //----affichage--
+                            while ($data=$query->fetch()){
+                                ?><div class="col-6 col-md-3"><?php
+                                display_product($data['pr_id'], $data['pr_title'], $data['pr_photo_1'], $data['pr_prix']);
+                                ?></div><?php
+                            }
+                            //----//affichage--
+
+                            $query->closeCursor();
+                        }
                         ?>
                     </div>
                 </div>
@@ -94,6 +151,11 @@
             case 'laitier':
                 ?>
                 <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h6><b>CATEGORIE :</b> LAITIER</h6>
+                        </div>
+                    </div>
                     <div class="row">
                         <?php
                         //--select laitiers depuis la base de données--
@@ -146,6 +208,11 @@
                 ?>
                 <div class="col-12">
                     <div class="row">
+                        <div class="col-12">
+                            <h6><b>CATEGORIE :</b> LEGUME</h6>
+                        </div>
+                    </div>
+                    <div class="row">
                         <?php
                         //--select laitiers depuis la base de données--
                         if ($filter == "recent"){
@@ -197,6 +264,11 @@
                 ?>
                 <div class="col-12">
                     <div class="row">
+                        <div class="col-12">
+                            <h6><b>CATEGORIE :</b> ARGUME</h6>
+                        </div>
+                    </div>
+                    <div class="row">
                         <?php
                         //--select laitiers depuis la base de données--
                         if ($filter == "recent"){
@@ -243,6 +315,70 @@
                 </div>
                 <?php
             break;
+
+            case 'pme': //display products for a specific pme
+                $pmeInfos=$db->prepare('SELECT pme_nom FROM pme WHERE pme_id=:id LIMIT 1');
+                $pmeInfos->bindValue(':id', $pme, PDO::PARAM_INT);
+                $pmeInfos->execute();
+                $pmeInfos=$pmeInfos->fetch();
+                ?>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="textInLines">
+                                <div class="line"></div>
+                                <div class="text">PME <?php echo $pmeInfos['pme_nom'] ?></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <?php
+                        //--select pme products depuis la base de données--
+                        if ($filter == "recent"){
+                            $query=$db->prepare('SELECT * FROM products WHERE pme_id=:id ORDER BY pr_id DESC LIMIT :min, :max');
+                            $query->bindValue(':min', $min, PDO::PARAM_INT);
+                            $query->bindValue(':max', $max, PDO::PARAM_INT);
+                            $query->bindValue(':id', $pme, PDO::PARAM_INT);
+                            $query->execute();
+                        }
+                        else if ($filter == "croissant"){
+                            $query=$db->prepare('SELECT * FROM products WHERE pme_id=:id ORDER BY pr_prix ASC LIMIT :min, :max');
+                            $query->bindValue(':min', $min, PDO::PARAM_INT);
+                            $query->bindValue(':max', $max, PDO::PARAM_INT);
+                            $query->bindValue(':id', $pme, PDO::PARAM_INT);
+                            $query->execute();
+                        }
+                        else if ($filter == "decroissant"){
+                            $query=$db->prepare('SELECT * FROM products WHERE pme_id=:id ORDER BY pr_prix DESC LIMIT :min, :max');
+                            $query->bindValue(':min', $min, PDO::PARAM_INT);
+                            $query->bindValue(':max', $max, PDO::PARAM_INT);
+                            $query->bindValue(':id', $pme, PDO::PARAM_INT);
+                            $query->execute();
+                        }
+                        else{ //no filter
+                            $query=$db->prepare('SELECT * FROM products WHERE pme_id=:id ORDER BY pr_id DESC LIMIT :min, :max');
+                            $query->bindValue(':min', $min, PDO::PARAM_INT);
+                            $query->bindValue(':max', $max, PDO::PARAM_INT);
+                            $query->bindValue(':id', $pme, PDO::PARAM_INT);
+                            $query->execute();
+                        }
+                        //--//select pme products depuis la base de données--
+
+                        //----affichage--
+                        while ($data=$query->fetch()){
+                            ?><div class="col-6 col-md-3"><?php
+                            display_product($data['pr_id'], $data['pr_title'], $data['pr_photo_1'], $data['pr_prix']);
+                            ?></div><?php
+                        }
+                        //----//affichage--
+
+                        $query->closeCursor();
+                        ?>
+                    </div>
+                </div>
+                <?php
+            break;
         }
         ?>
     </div>
@@ -252,9 +388,15 @@
             <div style="display:flex; justify-content:center; flex-wrap: wrap; max-width: 100%; overflow:auto">
                 <?php
                 // ----pagination (prend en compte le filtre)-----
-                if ($type != "all"){
+                if ($type != "all" and !isset($_GET['pme'])){
                     $maxProducts = $db->prepare('SELECT COUNT(*) FROM products WHERE pr_type=:type');
                     $maxProducts->bindValue(':type', $type, PDO::PARAM_STR);
+                    $maxProducts->execute();
+                    $maxProducts = $maxProducts->fetchcolumn();
+                }
+                else if ($type == "pme" and isset($_GET['pme'])){
+                    $maxProducts = $db->prepare('SELECT COUNT(*) FROM products WHERE pme_id=:id');
+                    $maxProducts->bindValue(':id', $pme, PDO::PARAM_INT);
                     $maxProducts->execute();
                     $maxProducts = $maxProducts->fetchcolumn();
                 }
