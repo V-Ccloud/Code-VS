@@ -92,7 +92,7 @@ else{ //pme exists
                 $nbr2=$produits->fetchcolumn();
                 ?>
                 <center>
-                    <div class="btn-group btn-group-lg">
+                    <div class="btn-group btn-group-lg" style="flex-wrap:wrap">
                         <button type="button" class="btn btn-dark" onclick="action('new-product')">Ajouter produit</button>
                         <button type="button" class="btn btn-warning" onclick="action('produits')"><span class="badge badge-success"><?php echo $nbr2 ?></span> Voir les produits</button>
                         <button type="button" class="btn btn-dark" onclick="action('commandes')"><span class="badge badge-success"><?php echo $nbr3 ?></span> Voir les commandes</button>

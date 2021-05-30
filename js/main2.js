@@ -269,3 +269,20 @@ $(document).ready(function(){
     });
 });
 //-----//animation logo on scroll------
+
+
+//----this shows pme product detail when user choose it (see in pages/pme-details.php (action==produits))----------
+function showPmeProduct(event){
+    const formDiv = document.querySelector('#pmeProductShow');
+    const productId = event.target.value;
+
+    if (parseInt(productId) > 0){
+        formDiv.innerHTML='<center><div class="spinner-border text-success"></div></center>'; //spinner
+
+        var formData = {productId: productId};
+        $.post("pages/php/showPmeProduct.php", formData).done(function (data) {
+            formDiv.innerHTML = data;
+        });
+    }
+}
+//----//this shows pme product detail when user choose it (see in pages/pme-details.php (action==produits))----------

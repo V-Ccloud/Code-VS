@@ -1,5 +1,5 @@
 <!-- this is the one that shows a product details -->
-<p><br><br></p>
+<p class="d-none d-md-block"><br><br></p>
 
 <div class="container">
     <div class="row product-display">
@@ -103,7 +103,11 @@
             
             <div class="col-12">
                 <hr><hr>
-                <h4>PRODUITS SIMILAIRES</h4>
+                <div class="textInLines">
+                    <div class="line"></div>
+                    <div class="text">PRODUITS SIMILAIRES</div>
+                    <div class="line"></div>
+                </div>
             </div>
             <div class="col-12">
                 <div class="row">
