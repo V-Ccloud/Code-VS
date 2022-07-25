@@ -94,9 +94,11 @@
                     </a>
                 </div>
                 <p></p>
-                <button type="button" class="btn btn-success myBtn" onclick="addToCart('<?php echo $id ?>', '<?php echo $us_id ?>')">+<span class="fa fa-shopping-cart"></span> Ajouter au panier</button>
+                
+                <!-- <button type="button" class="btn btn-success myBtn" onclick="addToCart('<?php echo $id ?>', '<?php echo $us_id ?>')">+<span class="fa fa-shopping-cart"></span> Ajouter au panier</button> -->
                 <p></p>
                 <p><?php echo $data['pr_description'] ?></p>
+                <a class="btn btn-primary" href="?q=commentcommander"> Comment Commander ?</a>
             </div>
             <!-- ----//afiichage des details du produit---- -->
 

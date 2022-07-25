@@ -286,3 +286,20 @@ function showPmeProduct(event){
     }
 }
 //----//this shows pme product detail when user choose it (see in pages/pme-details.php (action==produits))----------
+
+
+//----this shows pme commande detail when user choose it (see in pages/pme-details.php (action==commandes))----------
+function showPmeCommandes(event, action){
+    const formDiv = document.querySelector('#pmeCommandeShow');
+    const commandeId = event.target.value;
+
+    if (parseInt(commandeId) > 0){
+        formDiv.innerHTML='<center><div class="spinner-border text-success"></div></center>'; //spinner
+
+        var formData = {commandeId: commandeId, action: action};
+        $.post("pages/php/showPmeCommande.php", formData).done(function (data) {
+            formDiv.innerHTML = data;
+        });
+    }
+}
+//----//this shows pme commande detail when user choose it (see in pages/pme-details.php (action==commandes))----------

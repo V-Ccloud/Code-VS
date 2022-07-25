@@ -17,60 +17,38 @@
 
 <!-- The slideshow -->
 <div class="carousel-inner">
-    <div class="carousel-item active myCarouselItem" style="background:url('img/carousel-laitiers.png'); background-size:cover; background-position:center">
+    <div class="carousel-item active myCarouselItem" style="background:url('img/carousel.JPG'); background-size:cover; background-position:center">
+        <div class="content">
+            <div class="row">
+                <div class="d-none d-sm-block col-sm-2 col-md-4"></div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="carousel-item myCarouselItem" style="background:url('img/carousel-chemise.png'); background-size:cover; background-position:center">
         <div class="content">
             <div class="row">
                 <div class="d-none d-sm-block col-sm-2 col-md-4"></div>
                 <div class="d-none d-sm-block col-dm-8 col-md-4 block">
-                    <div class="image-laitier"></div>
-                    <h1>Laitiers bios</h1>
+                    <div class="chemise"></div>
+                    <h1>Costumes</h1>
                     <hr>
-                    <h5>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h5>
+                    <h5>Avec nous, le costume est un confort corporel pour vous rendre plus attentif et focus.</h5>
                     <hr>
                     <center>
-                        <a href="#"><button class="btn btn-success myBtn">Découvrez <?php echo $site_name ?></button></a> 
-                        <a href="?q=produits"><button class="btn btn-success myBtn">Découvrez nos produits</button></a>
+                        <a href="?q=apropos"><button class="btn btn-primary myBtn">Découvrez <?php echo $site_name ?></button></a> 
+                        <a href="?q=produits"><button class="btn btn-primary myBtn">Découvrez nos Tenues</button></a>
                     </center>
                 </div>
                 <div class="d-none d-sm-block col-sm-2 col-md-4"></div>
             </div>
         </div>
     </div>
-    <div class="carousel-item myCarouselItem" style="background:url('img/carousel-legumes.png'); background-size:cover; background-position:center">
+    <div class="carousel-item myCarouselItem" style="background:url('img/carousel-pantal.JPG'); background-size:cover; background-position:center">
         <div class="content">
             <div class="row">
                 <div class="d-none d-sm-block col-sm-2 col-md-4"></div>
-                <div class="d-none d-sm-block col-dm-8 col-md-4 block">
-                    <div class="image-legume"></div>
-                    <h1>Légumes bios</h1>
-                    <hr>
-                    <h5>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h5>
-                    <hr>
-                    <center>
-                        <a href="#"><button class="btn btn-success myBtn">Découvrez <?php echo $site_name ?></button></a> 
-                        <a href="?q=produits"><button class="btn btn-success myBtn">Découvrez nos produits</button></a>
-                    </center>
-                </div>
-                <div class="d-none d-sm-block col-sm-2 col-md-4"></div>
-            </div>
-        </div>
-    </div>
-    <div class="carousel-item myCarouselItem" style="background:url('img/carousel-argumes.png'); background-size:cover; background-position:center">
-        <div class="content">
-            <div class="row">
-                <div class="d-none d-sm-block col-sm-2 col-md-4"></div>
-                <div class="d-none d-sm-block col-dm-8 col-md-4 block">
-                    <div class="image-argume"></div>
-                    <h1>Agrûmes bios</h1>
-                    <hr>
-                    <h5>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h5>
-                    <hr>
-                    <center>
-                        <a href="#"><button class="btn btn-success myBtn">Découvrez <?php echo $site_name ?></button></a> 
-                        <a href="?q=produits"><button class="btn btn-success myBtn">Découvrez nos produits</button></a>
-                    </center>
-                </div>
-                <div class="d-none d-sm-block col-sm-2 col-md-4"></div>
+                
             </div>
         </div>
     </div>
@@ -91,22 +69,26 @@
 <!-- promotions -->
 <div class="container-fluid promotion">
     <div class="row">
-        <div class="col-3 promotion-bg1">
-            <span class="fa fa-shopping-cart icon" title="Livraison partout au Maroc"></span>
-            <span class="d-none d-md-block">Livraison partout au Maroc</span>
-        </div>
         <div class="col-3 promotion-bg2">
-            <span class="fa fa-certificate icon" title="Qualité bio garantie"></span>
-            <span class="d-none d-md-block">Qualité bio garantie</span>
+            <span class="fa fa-map-marker" title="Points relais de livraison"></span>
+            <span class="d-none d-md-block">Points relais de retrait</span>
         </div>
         <div class="col-3 promotion-bg1">
-            <span class="fa fa-money icon" title="Paiement à la livraison"></span>
-            <span class="d-none d-md-block">Paiement à la livraison</span>
+            <span class="fa fa-certificate icon" title="Qualité de confection"></span>
+            <span class="d-none d-md-block">Qualité de confection</span>
         </div>
         <div class="col-3 promotion-bg2">
-            <span class="fa fa-commenting icon" title="Service client 24h/7"></span>
-            <span class="d-none d-md-block">Service client 24h/7</span>
+            <span class="fa fa-money icon" title="Mode de paiement"></span>
+            <span class="d-none d-md-block">Mode de paiement</span>
         </div>
+
+        <div class="col-3 promotion-bg1">
+                <span class="fa fa-question-circle" style="" title="Comment Commander"></span>
+                
+                <span class="d-none d-md-block">Comment Commander ?</span>
+        </div>
+        
+
     </div>
 </div>
 <!-- promotions// -->
@@ -117,7 +99,7 @@
         <div class="col-12">
             <div class="textInLines">
                 <div class="line"></div>
-                <div class="text" style="font-size:30px">SELECTION DE PRODUITS</div>
+                <div class="text" style="font-size:30px">NOS KITS</div>
                 <div class="line"></div>
             </div>
         </div>
@@ -146,7 +128,7 @@
                 <div class="col-12">
                     <hr>
                     <center>
-                        <a href="?q=produits"><button type="button" class="btn btn-dark">VOIR TOUS LES PRODUITS</button></a>
+                        <a href="?q=produits"><button type="button" class="btn btn-dark">VOIR TOUS NOS KITS</button></a>
                     </center>
                 </div>
             </div>
@@ -177,7 +159,7 @@
                 <div class="col-12">
                     <hr>
                     <center>
-                        <a href="?q=produits"><button type="button" class="btn btn-dark btn-sm">VOIR TOUS LES PRODUITS</button></a>
+                        <a href="?q=produits"><button type="button" class="btn btn-dark btn-sm">VOIR TOUS NOS KITS</button></a>
                     </center>
                 </div>
             </div>
@@ -191,7 +173,7 @@
 
 <!-- products categories -->
 <div class="container">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-12">
             <div class="textInLines">
                 <div class="line"></div>
@@ -207,8 +189,8 @@
             <a href="?q=produits&type=laitier">
             <div class="cat-laitiers">
                 <div class="categorie">
-                    <h1>Produits</h1>
-                    <h1>Laitiers</h1>
+                    <h1>KIT</h1>
+                    <h1>COSTUME</h1>
                 </div>
             </div>
             </a>
@@ -217,8 +199,7 @@
             <a href="?q=produits&type=legume">
             <div class="cat-legumes">
                 <div class="categorie">
-                    <h1>Produits</h1>
-                    <h1>Légumes</h1>
+                    <h1>CHEMISES</h1>
                 </div>
             </div>
             </a>
@@ -227,8 +208,7 @@
             <a href="?q=produits&type=argume">
             <div class="cat-argumes">
                 <div class="categorie">
-                    <h1>Produits</h1>
-                    <h1>Argûmes</h1>
+                    <h1>PANTALON</h1> -->
                 </div>
             </div>
             </a>

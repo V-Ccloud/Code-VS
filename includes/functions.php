@@ -35,9 +35,8 @@ function display_product($id, $title, $photo, $prix){
         </a>
         <div class="infos" style="padding-bottom:15px">
             <center>
-                <button type="button" class="d-none d-md-block btn btn-success myBtn" onclick="addToCart('<?php echo $id ?>', '<?php echo $usId ?>')">+<span class="fa fa-shopping-cart"></span> Ajouter au panier</button>
-                <button type="button" class="d-md-none btn btn-success myBtn" onclick="addToCart('<?php echo $id ?>', '<?php echo $usId ?>')">+<span class="fa fa-shopping-cart"></span> panier</button>
-            </center>
+                <a class="btn btn-primary" href="?q=commentcommander">Comment Commander ?</a>
+                </center>
         </div>
     </div>
     <p></p>

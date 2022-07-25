@@ -1,4 +1,4 @@
-<!-- this file handle a cart confirmation for user (une commande quoi) -->
+this file handle a cart confirmation for user (une commande quoi)
 
 <p><br><br></p>
 

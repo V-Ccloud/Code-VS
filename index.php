@@ -4,6 +4,7 @@ session_start();
 include('includes/constants.php');
 include('includes/db.php');
 include('includes/functions.php');
+include('includes/visiteurs.php');
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ include('includes/functions.php');
             <!---ordinateur et grand écran//--->
             <div class="row myHeader">
                 <div class="col-md-6 left">
-                    <a href="?q=home"><img src="img/logo_linkpme.png" class="logoToMoveOnScroll" alt="LOGO"></a>
+                    <a href="?q=home"><img src="img/logo_vscloths.png" class="logoToMoveOnScroll" alt="LOGO"></a>
                 </div>
                 <div class="col-md-6 right">
                     <div>
@@ -45,7 +46,8 @@ include('includes/functions.php');
                         <a href="<?php echo $site_facebook ?>" target="_blank"><span class="fa fa-facebook-square icon"></span></a>
                         <a href="<?php echo $site_instagram ?>" target="_blank"><span class="fa fa-instagram icon"></span></a>
                         <a href="<?php echo $site_twitter ?>" target="_blank"><span class="fa fa-twitter-square icon"></span></a>
-                        <a href="<?php echo $site_whatsapp ?>" target="_blank"><span class="fa fa-whatsapp icon"></span></a>
+                        <a href="https://api.whatsapp.com/send?phone=2250798696853" target="_blank"><span class="fa fa-whatsapp icon"></span></a>
+                        <a href="<?php echo $site_linkedin ?>" target="_blank"><span class="fa fa-linkedin icon"></span></a>
                     </div>
                 </div>
             </div>
@@ -61,13 +63,16 @@ include('includes/functions.php');
                     <center><a href="<?php echo $site_facebook ?>" target="_blank"><span class="fa fa-facebook-square icon"></span></a></center>
                 </div>
                 <div class="col-4 left">
-                    <center><a href="mailto:<?php echo $site_email ?>"><span class="fa fa-envelope"></span></a></center>
+                    <center><a href="mailto:<?php echo $site_email ?>"><span class="fa fa-envelope icon"></span></a></center>
                 </div>
                 <div class="col-2 left">
                     <center><a href="<?php echo $site_twitter ?>" target="_blank"><span class="fa fa-twitter-square icon"></span></a></center>
                 </div>
                 <div class="col-2 left">
-                    <center><a href="<?php echo $site_whatsapp ?>" target="_blank"><span class="fa fa-whatsapp icon"></span></a></center>
+                    <center><a href="https://api.whatsapp.com/send?phone=2250798696853" target="_blank"><span class="fa fa-whatsapp icons"></span></a></center>
+                </div>
+                <div class="col-2 left">
+                    <center><a href="<?php echo $site_linkedin ?>" target="_blank"><span class="fa fa-linkedin icon"></span></a></center>
                 </div>
             </div>
         </div>
@@ -78,7 +83,7 @@ include('includes/functions.php');
             <nav class="navbar navbar-expand-md navbar-dark navContent">
                 <!---- Brand//---->
                 <a class="navbar-brand myNavbarBrand d-none d-md-block" href="?q=home"><?php echo $site_name ?></a>
-                <a class="navbar-brand d-md-none" href="?q=home"><img src="img/logo_linkpme.png" class="img-fluid" alt="LOGO" style="max-height:25px"></a>
+                <a class="navbar-brand d-md-none" href="?q=home"><img src="img/logo_vscloths.png" class="img-fluid" alt="LOGO" style="max-height:25px"></a>
                 <!---- Toggler/collapsibe Button //---->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
@@ -87,30 +92,21 @@ include('includes/functions.php');
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                <?php echo $site_name ?>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">A propos de <?php echo $site_name ?></a>
-                                <a class="dropdown-item" href="#">Nos produits sont-ils bio ?</a>
-                                <div class="dropdown-about-image d-none d-md-block"></div>
-                            </div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="?q=apropos">A propos</a>
+                            </li> 
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            <!-- <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                 Nos produits
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="?q=produits">Tous nos produits</a>
-                                <a class="dropdown-item" href="?q=produits&type=laitier">Laitiers</a>
-                                <a class="dropdown-item" href="?q=produits&type=legume">Légumes</a>
-                                <a class="dropdown-item" href="?q=produits&type=argume">Argûmes</a>
-                                <div class="dropdown-produits-image d-none d-md-block"></div>
-                            </div>
+                            </a> -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="?q=produits">NOS TENUES</a>
+                            </li>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="#">Nos partenaires</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="?q=contact">Contact</a>
                         </li>
@@ -118,7 +114,7 @@ include('includes/functions.php');
                             <input class="myInput mr-sm-2" type="text" name="searchQuery" placeholder="Recherchez ici" required>
                             <button class="btn btn-default" type="submit" style="margin-left:-40px"><span class="fa fa-search"></span></button>
                         </form>
-                        <li class="nav-item dropdown dropleft">
+                        <!-- <li class="nav-item dropdown dropleft">
                             <?php if ($us_id <= 0 and $pme_id <= 0){ //user not connected ?>
                                 <a class="nav-link" href="#" data-toggle="dropdown">
                                     <span class="fa fa-user-circle icon"></span>
@@ -126,30 +122,26 @@ include('includes/functions.php');
                                 <div class="dropdown-menu">
                                     <span class="dropdown-item-text">Connexion</span>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalConnexion">
-                                        <button type="button" class="btn btn-dark btn-sm btn-block">Connexion client (j'achète)</button>
+                                        <button type="button" class="btn btn-dark btn-sm btn-block">Connexion client </button>
                                     </a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalConnexionPme">
-                                        <button type="button" class="btn btn-dark btn-sm btn-block">Connexion PME (je vend)</button>
-                                    </a>
+                                   
                                     <span class="dropdown-item-text">Inscription</span>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalInscription">
-                                        <button type="button" class="btn btn-dark btn-sm btn-block">Inscription client (j'achète)</button>
+                                        <button type="button" class="btn btn-dark btn-sm btn-block">Inscription client </button>
                                     </a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalInscriptionPme">
-                                        <button type="button" class="btn btn-dark btn-sm btn-block">Inscription PME (je vend)</button>
-                                    </a>
+                                   
                                 </div>
                             <?php }else if ($pme_id > 0){ ?>
                                 <a class="nav-link" href="?q=pme"><span class="fa fa-user-circle icon"></span></a>
                             <?php }else{ ?>
                                 <a class="nav-link" href="?q=user"><span class="fa fa-user-circle icon"></span></a>
                             <?php } ?>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="?q=panier">
                                 <span class="fa fa-shopping-cart icon"></span>
                                 <span class="cart-counter">0</span>
-                            </a>
+                            </a> -->
                         </li>
                     </ul>
                 </div>
@@ -171,6 +163,13 @@ include('includes/functions.php');
                 include('pages/produits.php');
             break;
 
+            case 'commentcommander': //the step to buy
+                include('pages/commentcommander.php');
+            break;
+            case 'paiement': //the step to buy
+                include('pages/paiement.php');
+            break;
+
             case 'produit-details': //display details of specific product
                 include('pages/produit-details.php');
             break;
@@ -179,8 +178,20 @@ include('includes/functions.php');
                 include('pages/panier.php');
             break;
 
+            case 'apropos': //client cart
+                include('pages/apropos.php');
+            break;
+
+            case 'partenaires': //client cart
+                include('pages/partenaires.php');
+            break;
+
             case 'commande': //valider commande (tout le process)
                 include('pages/commande.php');
+            break;
+
+            case 'document': //telecharger le document
+                include('pages/doc.php');
             break;
 
             case 'user': //user account
@@ -215,7 +226,8 @@ include('includes/functions.php');
                     <a href="<?php echo $site_facebook ?>" target="_blank"><span class="fa fa-facebook-square icon"></span></a>
                     <a href="<?php echo $site_instagram ?>" target="_blank"><span class="fa fa-instagram icon"></span></a>
                     <a href="<?php echo $site_twitter ?>" target="_blank"><span class="fa fa-twitter-square icon"></span></a>
-                    <a href="<?php echo $site_whatsapp ?>" target="_blank"><span class="fa fa-whatsapp icon"></span></a>
+                    <a href="https://api.whatsapp.com/send?phone=2250798696853" target="_blank"><span class="fa fa-whatsapp icon"></span></a>
+                    <a href="<?php echo $site_linkedin ?>" target="_blank"><span class="fa fa-linkedin icon"></span></a>
 
                 </div>
                 <div class="col-sm-6 col-md-3">
@@ -226,23 +238,24 @@ include('includes/functions.php');
                     <p><span class="fa fa-phone"></span> <a href="tel:<?php echo $site_phone ?>"><?php echo $site_phone ?></a></p>
                 </div>
                 <div class="col-sm-6 col-md-3">
-                    <h5>Nos Produits</h5>
+                    <h5>Nos Tenues</h5>
                     <hr>
                     <div>
-                        <a href="?q=produits&type=laitier"><img src="img/laitier.png" class="rounded-circle img-fluid" style="max-width:60px"> Laitiers</a><br>
-                        <a href="?q=produits&type=legume"><img src="img/legumes.png" class="rounded-circle img-fluid" style="max-width:60px"> Légumes</a><br>
-                        <a href="?q=produits&type=argume"><img src="img/Argume.png" class="rounded-circle img-fluid" style="max-width:60px"> Argûmes</a>
+                        <a href="?q=produits&type=Kit complet"><img src="img/products/1629153513.JPG" class="rounded-circle img-fluid" style="max-width:60px"> Kit Complet</a><br>
+                        <a href="?q=produits&type=Kit moyen"><img src="img/products/PRODUCT 1.png" class="rounded-circle img-fluid" style="max-width:60px"> Kit Moyen</a><br>
+                        <a href="?q=produits&type=Kit simple"><img src="img/products/Kit de classe master ESATIC.JPG" class="rounded-circle img-fluid" style="max-width:60px"> Kit Simple</a>
                     </div>
                 </div>
+                
                 <div class="col-sm-6 col-md-3">
                     <h5>Liens Utiles</h5>
                     <hr>
                     <a href="?q=home">Accueil</a><br>
-                    <a href="?q=produits">Produits</a><br>
-                    <a href="?q=partenaires">Partenaires</a><br>
-                    <a href="?q=bio-garanti">Produit bio garanti</a><br>
+                    <a href="?q=produits">Nos Tenues</a><br>
+                    <a href="?q=commentcommander">Comment Commander</a><br>
+                    <a href="?q=paiement">Modes de paiement</a><br>
                     <a href="?q=contact">Contacts</a><br>
-                    <a href="?q=a-propos">A Propos</a>
+                    <a href="?q=apropos">A Propos</a>
                 </div>
 
                 <div class="col-12 copyright">
@@ -288,9 +301,9 @@ include('includes/functions.php');
                             </div>
                             <div class="form-group col-12">
                                 <hr>
-                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalInscription" style="color:green; font-size:15px; opacity:1; font-weight:normal">Inscription client</a>
-                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalConnexionPme" style="color:green; font-size:15px; opacity:1; font-weight:normal">Connexion PME</a>
-                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalInscriptionPme" style="color:green; font-size:15px; opacity:1; font-weight:normal">Inscription PME</a>
+                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalInscription" style="color:blue; font-size:15px; opacity:1; font-weight:normal">Inscription client</a>
+                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalConnexionPme" style="color:blue; font-size:15px; opacity:1; font-weight:normal">Connexion ID</a>
+                                <!-- <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalInscriptionPme" style="color:blue; font-size:15px; opacity:1; font-weight:normal">Inscription PME</a> -->
                             </div>
                         </form>
                     </div>
@@ -309,7 +322,7 @@ include('includes/functions.php');
                 <div class="modal-content">
                     <!-- Modal Header// -->
                     <div class="modal-header">
-                        <h5 class="modal-title"><span class="fa fa-user"></span> CONNEXION <b>PME</b></h5>
+                        <h5 class="modal-title"><span class="fa fa-user"></span> CONNEXION <b>ID</b></h5>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
@@ -320,10 +333,10 @@ include('includes/functions.php');
                         </div>
                         <form class="col-md-7" onsubmit="signInPme(event)" style="padding:15px">
                             <div class="form-group col">
-                                <label>Vous êtes une PME ? Connectez-vous à votre espace.</label>
+                                <label>Espace privé, réservé uniquement à l'administrateur.</label>
                             </div>
                             <div class="form-group col">
-                                <label>Email de la PME</label>
+                                <label>Email </label>
                                 <input type="email" required name="email" placeholder="Adresse email" class="form-control myInput">
                             </div>
                             <div class="form-group col">
@@ -335,7 +348,7 @@ include('includes/functions.php');
                             </div>
                             <div class="form-group col-12">
                                 <hr>
-                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalInscriptionPme" style="color:green; font-size:15px; opacity:1; font-weight:normal">Inscription PME</a>
+                                <!-- <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalInscriptionPme" style="color:green; font-size:15px; opacity:1; font-weight:normal">Inscription PME</a> -->
                                 <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalInscription" style="color:green; font-size:15px; opacity:1; font-weight:normal">Inscription client</a>
                                 <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalConnexion" style="color:green; font-size:15px; opacity:1; font-weight:normal">Connexion client</a>
                             </div>
@@ -381,6 +394,10 @@ include('includes/functions.php');
                                 <input type="email" required name="email" placeholder="Adresse email" class="form-control myInput">
                             </div>
                             <div class="form-group col">
+                                <label>N° de telephone</label>
+                                <input type="text" required name="numéro" placeholder="xxxxxxxxxx" class="form-control myInput">
+                            </div>
+                            <div class="form-group col">
                                 <label>Mot de passe</label>
                                 <input type="password" required name="mdp" placeholder="Mot de passe" class="form-control myInput">
                             </div>
@@ -389,9 +406,9 @@ include('includes/functions.php');
                             </div>
                             <div class="form-group col-12">
                                 <hr>
-                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalConnexionPme" style="color:green; font-size:15px; opacity:1; font-weight:normal">Connexion PME</a>
+                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalConnexionPme" style="color:green; font-size:15px; opacity:1; font-weight:normal">Connexion ID</a>
                                 <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalConnexion" style="color:green; font-size:15px; opacity:1; font-weight:normal">Connexion client</a>
-                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalInscriptionPme" style="color:green; font-size:15px; opacity:1; font-weight:normal">Inscription PME</a>
+                                <!-- <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalInscriptionPme" style="color:green; font-size:15px; opacity:1; font-weight:normal">Inscription PME</a> -->
                             </div>
                         </form>
                     </div>
@@ -402,64 +419,11 @@ include('includes/functions.php');
         <!-- //modal inscription client -->
 
 
-        <!-- modal inscription pme -->
-            <!-- The Modal// -->
-        <div class="modal fade" id="modalInscriptionPme">
-            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <!-- Modal Header// -->
-                    <div class="modal-header">
-                        <h5 class="modal-title"><span class="fa fa-user"></span> INSCRIPTION <b>PME</b></h5>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <!-- Modal body// -->
-                    <div class="modal-body row" style="padding:0px">
-                        <div class="col-md-5 d-none d-md-block">
-                            <div style="background:url('img/carousel-laitiers.png'); background-size:cover; background-position:center; width:100%; height:100%"></div>
-                        </div>
-                        <form class="col-md-7" onsubmit="signUpPme(event)" style="padding:15px">
-                            <div class="form-group col">
-                                <label>Vous êtes une PME ? Faites votre demande de création de compte pour mettre vos produits en ligne.</label>
-                                <label><b>NB :</b> notez que votre demande sera soumise à une vérification avant confirmation.</label>
-                            </div>
-                            <div class="form-group col">
-                                <label>Nom de la PME</label>
-                                <input type="text" required name="nom" placeholder="PME" class="form-control myInput">
-                            </div>
-                            <div class="form-group col">
-                                <label>Email de la PME</label>
-                                <input type="email" required name="email" placeholder="Email" class="form-control myInput">
-                            </div>
-                            <div class="form-group col">
-                                <label>Téléphone de la PME</label>
-                                <input type="text" required name="phone" placeholder="Ex: +212xxxxxxxxx" class="form-control myInput">
-                            </div>
-                            <div class="form-group col">
-                                <label>Mot de passe</label>
-                                <input type="password" required name="mdp" placeholder="Mot de passe" class="form-control myInput">
-                            </div>
-                            <div class="form-group col">
-                                <button type="submit" class="btn btn-dark"><span class="fa fa-key"></span> Inscription PME</button>
-                            </div>
-                            <div class="form-group col-12">
-                                <hr>
-                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalConnexionPme" style="color:green; font-size:15px; opacity:1; font-weight:normal">Connexion PME</a>
-                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalConnexion" style="color:green; font-size:15px; opacity:1; font-weight:normal">Connexion client</a>
-                                <a class="nav-link close" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modalInscription" style="color:green; font-size:15px; opacity:1; font-weight:normal">Inscription client</a>
-                            </div>
-                        </form>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        <!-- //modal inscription pme -->
-
+       
         <!-- page loader -->
         <div class="page-loader">
-            <div class="spinner-border text-success">
-                <div class="spinner-grow text-success spinner-grow-sm"></div>
+            <div class="spinner-border text-primary">
+                <div class="spinner-grow text-primary spinner-grow-sm"></div>
             </div>
         </div>
         <!-- //page loader -->

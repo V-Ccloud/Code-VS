@@ -68,7 +68,7 @@
         </div>
         <div class="col-12">
             <hr>
-            <a href="?q=produits"><button class="btn btn-dark">+<span class="fa fa-shopping-cart"></span> Ajouter au panier</button></a> 
+            <a href="?q=produits"><button class="btn btn-dark">+<span class="fa fa-shopping-cart"></span> Comment Commander</button></a> 
             <?php if ($us_id <= 0){ //user not connected ?>
                 <a href="#" data-toggle="modal" data-target="#modalConnexion" id="validerPanier"><button class="btn btn-dark"><span class="fa fa-check"></span><span class="fa fa-shopping-cart"></span> Valider mon panier</button></a>
             <?php }else{ ?>

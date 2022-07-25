@@ -634,6 +634,120 @@ switch ($action){
         }
     break;
 
+    case 'commandes': //voir les commandes
+        ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="textInLines">
+                        <div class="line"></div>
+                        <div class="text">Commandes Reçues</div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <!-- commande non encore livrées -->
+                    <center><h5><b>Non Livrées :</b> Choisir une commande ci-dessous pour plus d'option</h5></center>
+                    <?php
+                    $query=$db->prepare('SELECT cm_id, cm_commandeId, cm_articles FROM commandes WHERE cm_livree=0 ORDER BY cm_id DESC');
+                    $query->bindValue(':pme', $pme_id, PDO::PARAM_INT);
+                    $query->execute();
+                    ?>
+                    <select class="form-control myInput" onchange="showPmeCommandes(event)">
+                        <option value="">Choisir une commande</option>
+                        <?php
+                        $num = 0;
+                        while ($data=$query->fetch()){
+                            //------checker si la commande contient un article de la pme//--------
+                            $articles = explode(';', $data['cm_articles']); //liste des articles (ids) de la commande
+                            foreach ($articles as $article){
+                                //------checker si l'article appartient à la pme//--------
+                                $test=$db->prepare('SELECT COUNT(*) FROM products WHERE pr_id=:pr AND pme_id=:pme');
+                                $test->bindValue(':pr', $article, PDO::PARAM_INT);
+                                $test->bindValue(':pme', $pme_id, PDO::PARAM_INT);
+                                $test->execute();
+                                $test=$test->fetchcolumn();
+
+                                if ($test > 0){ //l'article en question appartient à la pme
+                                    $num++;
+                                    ?><option value="<?php echo $data['cm_id'] ?>"><?php echo "Commande ".$num." : ".$data['cm_commandeId'] ?></option><?php
+                                    break; //car on veut juste savoir si la commande contient un article de la pme
+                                }
+                            }
+                        }
+                        if ($num == 0){
+                            ?><option value="">Aucune commande reçue</option><?php
+                        }
+                        ?>
+                    </select>
+
+                    <!-- //commande non encore livrées -->
+                    <hr><hr>
+                    <!-- commande déjà livrées -->
+                    <center><h5><b>Déjà Livrées :</b> Choisir une commande ci-dessous pour plus d'option</h5></center>
+                    <?php
+                    $query=$db->prepare('SELECT cm_id, cm_commandeId, cm_articles FROM commandes WHERE cm_livree=1 ORDER BY cm_id DESC');
+                    $query->bindValue(':pme', $pme_id, PDO::PARAM_INT);
+                    $query->execute();
+                    ?>
+                    <select class="form-control myInput" onchange="showPmeCommandes(event)">
+                        <option value="">Choisir une commande</option>
+                        <?php
+                        $num = 0;
+                        while ($data=$query->fetch()){
+                            $articles = explode(';', $data['cm_articles']); //liste des articles (ids) de la commande
+                            foreach ($articles as $article){
+                                //------checker si la commande contient un article de la pme//--------
+                                $test=$db->prepare('SELECT COUNT(*) FROM products WHERE pr_id=:pr AND pme_id=:pme');
+                                $test->bindValue(':pr', $article, PDO::PARAM_INT);
+                                $test->bindValue(':pme', $pme_id, PDO::PARAM_INT);
+                                $test->execute();
+                                $test=$test->fetchcolumn();
+
+                                if ($test > 0){ //l'article en question appartient à la pme
+                                    $num++;
+                                    ?><option value="<?php echo $data['cm_id'] ?>"><?php echo "Commande ".$num." : ".$data['cm_commandeId'] ?></option><?php
+                                    break; //car on veut juste savoir si la commande contient un article de la pme
+                                }
+                            }
+                        }
+                        if ($num == 0){
+                            ?><option value="">Aucune commande livrée</option><?php
+                        }
+                        ?>
+                    </select>
+                    <hr><hr>
+
+                    <!-- this div is filed in whith selected product details (see function showPmeProduct() in js/main.js)// -->
+                    <div id="pmeCommandeShow" class="row"></div>
+                    
+                    <!-- //commande déjà livrées -->
+                </div>
+            </div>
+        </div>
+        <?php
+    break;
+
+    case 'setCl': //set a commande as déjà livrée
+        $commandeId = (int) (isset($_GET['pq']))?(htmlspecialchars($_GET['pq'])):''; //commande id
+        $query=$db->prepare('UPDATE commandes SET cm_livree=1 WHERE cm_id=:cm');
+        $query->bindValue(':cm', $commandeId, PDO::PARAM_INT);
+        $query->execute();
+        $query->closeCursor();
+        
+        echo success("Commande marquée livrée. <a href='?q=pme-actions&action=commandes'>Retour</a>");
+    break;
+
+    case 'setCnl': //set a commande as pas encore livrée
+        $commandeId = (int) (isset($_GET['pq']))?(htmlspecialchars($_GET['pq'])):''; //commande id
+        $query=$db->prepare('UPDATE commandes SET cm_livree=0 WHERE cm_id=:cm');
+        $query->bindValue(':cm', $commandeId, PDO::PARAM_INT);
+        $query->execute();
+        $query->closeCursor();
+        
+        echo success("Commande marquée comme pas encore livrée. <a href='?q=pme-actions&action=commandes'>Retour</a>");
+    break;
+
     default:
         include('pages/404.html');
     break;

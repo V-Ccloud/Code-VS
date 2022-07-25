@@ -148,12 +148,12 @@
                 <?php
             break;
 
-            case 'laitier':
+            case 'Kit Complet':
                 ?>
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            <h6><b>CATEGORIE :</b> LAITIER</h6>
+                            <h6><b>CATEGORIE :</b> Kit Complet</h6>
                         </div>
                     </div>
                     <div class="row">
@@ -204,12 +204,12 @@
                 <?php
             break;
 
-            case 'legume':
+            case 'Kit Moyen':
                 ?>
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            <h6><b>CATEGORIE :</b> LEGUME</h6>
+                            <h6><b>CATEGORIE :</b> Kit Moyen</h6>
                         </div>
                     </div>
                     <div class="row">
@@ -260,17 +260,17 @@
                 <?php
             break;
 
-            case 'argume':
+            case 'Kit Simple':
                 ?>
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            <h6><b>CATEGORIE :</b> ARGUME</h6>
+                            <h6><b>CATEGORIE :</b> Kit Simple</h6>
                         </div>
                     </div>
                     <div class="row">
                         <?php
-                        //--select laitiers depuis la base de données--
+                        //--select Kit Simple depuis la base de données--
                         if ($filter == "recent"){
                             $query=$db->prepare('SELECT * FROM products WHERE pr_type=:type ORDER BY pr_id DESC LIMIT :min, :max');
                             $query->bindValue(':min', $min, PDO::PARAM_INT);
@@ -299,7 +299,7 @@
                             $query->bindValue(':type', $type, PDO::PARAM_STR);
                             $query->execute();
                         }
-                        //--//select laitiers depuis la base de données--
+                        //--//select Kit Simple depuis la base de données--
 
                         //----affichage--
                         while ($data=$query->fetch()){

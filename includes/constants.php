@@ -1,24 +1,26 @@
 <?php
 // this is all constants of the website
 
-$site_name = "LinkPME";
+$site_name = "VS-CLOTHS";
 
-$site_adresse = "Adresse de ".$site_name.", Maroc";
+$site_adresse = " VS-CLOTHS, Yamoussoukro, Côte d'Ivoire";
 
-$site_email = "exemple@gmail.com";
+$site_email = "vs.cloths21@yahoo.com";
 
-$site_phone = "+212601010101";
+$site_phone = "+2250554510210";
 
-$site_facebook = "lien facebook";
+$site_facebook = "https://www.facebook.com/VSCLOTHS/?ref=pages_you_manage";
 
-$site_instagram = "lien instagram";
+$site_instagram = "https://www.instagram.com/vs.cloths/";
 
-$site_twitter = "lien twitter";
+$site_twitter = "https://twitter.com/ClothsVs";
 
-$site_whatsapp = "+212601010101";
+$site_whatsapp = "+2250798696853";
 
-$devise = "dh";
+$site_linkedin = "https://www.linkedin.com/company/vs-cloths/?viewAsMember=true";
 
-$types_produit = array('laitier', 'legume', 'argume');
+$devise = "DH";
+
+$types_produit = array('Kit Complet', 'Kit Moyen', 'Kit Simple');
 
 ?>

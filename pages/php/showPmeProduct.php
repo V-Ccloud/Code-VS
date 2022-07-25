@@ -7,7 +7,7 @@ if(session_status() == PHP_SESSION_NONE){ //check if sessions already started or
 $thePmeId = $_SESSION['pme_id'];
 
 include_once('../../includes/db.php'); //data base connexion
-include_once('../../includes/constants.php'); //data base connexion
+include_once('../../includes/constants.php');
 
 $productId = (int) (isset($_POST['productId']))?(htmlspecialchars($_POST['productId'])):''; //product id
 
